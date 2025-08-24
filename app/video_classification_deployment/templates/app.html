@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Shoplifting Classification App</title>
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Please upload your video</h1>
+        <form method="post" action="{% url 'process_upload' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="video" accept=".mp4,video/mp4" required>
+            <input type="submit" value="Upload">
+        </form>
+
+        {% if prediction %}
+            <div class="result-row">
+                <div class="predicted">
+                    <h2>{{ prediction }}</h2>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
